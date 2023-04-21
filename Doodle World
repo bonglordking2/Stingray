@@ -3,17 +3,14 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 local Window = OrionLib:MakeWindow({
     Name = "Manta Hub - Doodle World",
     HidePremium = false,
-    IntroText = "MantaHub",
-   --IntroIcon = "rbxassetid://13169412462"
+    IntroText = "MantaHub"
+    -- IntroIcon = "rbxassetid://13169412462"
 })
 On12345 = 0
 
 local AllPlayers = game:GetService("Players")
 local SelfPlayer = AllPlayers.LocalPlayer
 local me = tostring(SelfPlayer)
-
-
-
 
 -- functions
 
@@ -22,59 +19,63 @@ function doodleheal()
         [1] = "Heal",
         [2] = "Printer"
     }
-    
-    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataEvent"):FireServer(unpack(args))
+
+    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataEvent"):FireServer(
+        unpack(args))
 end
 
 local Noclip = nil
 local Clip = nil
 
 function noclip()
-	Clip = false
-	local function Nocl()
-		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
-			for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-				if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
-					v.CanCollide = false
-				end
-			end
-		end
-		wait(0.21) -- basic optimization
-	end
-	Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+    Clip = false
+    local function Nocl()
+        if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+            for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+                    v.CanCollide = false
+                end
+            end
+        end
+        wait(0.21) -- basic optimization
+    end
+    Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
 end
 
 function clip()
-	if Noclip then Noclip:Disconnect() end
-	Clip = true
+    if Noclip then
+        Noclip:Disconnect()
+    end
+    Clip = true
 end
-
-
 
 function collect()
     local args = {
         [1] = "CollectTickets",
         [2] = "1"
     }
-    
-    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataFunc"):InvokeServer(unpack(args))
+
+    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataFunc"):InvokeServer(
+        unpack(args))
     local args = {
         [1] = "CollectTickets",
         [2] = "2"
     }
-    
-    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataFunc"):InvokeServer(unpack(args))
 
-end  
+    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataFunc"):InvokeServer(
+        unpack(args))
+
+end
 
 function isbusy()
     local args = {
         [1] = "ToggleBusy",
         [2] = true
     }
-    
-    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataEvent"):FireServer(unpack(args))
-    
+
+    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataEvent"):FireServer(
+        unpack(args))
+
 end
 
 function notbusy()
@@ -82,9 +83,10 @@ function notbusy()
         [1] = "ToggleBusy",
         [2] = false
     }
-    
-    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataEvent"):FireServer(unpack(args))
-    
+
+    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataEvent"):FireServer(
+        unpack(args))
+
 end
 
 function bike()
@@ -92,326 +94,345 @@ function bike()
         [1] = "MountBike",
         [2] = true
     }
-    
-    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataEvent"):FireServer(unpack(args))
-end    
+
+    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataEvent"):FireServer(
+        unpack(args))
+end
 
 function nobike()
     local args = {
         [1] = "MountBike",
         [2] = false
     }
-    
-    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataEvent"):FireServer(unpack(args))
-end   
 
---functions activated on start
+    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("PlayerDataEvent"):FireServer(
+        unpack(args))
+end
 
+-- functions activated on start
 
 -- Tabs:
-    local Main = Window:MakeTab({
-        Name = "Main"
-    })
-    local Encounters = Window:MakeTab({
-        Name = "Encountering"
-    })
-    local Transport = Window:MakeTab({
-        Name = "Movement"
-    })
-    local Stats= Window:MakeTab({
-        Name = "Statistics"
-    })
+local Main = Window:MakeTab({
+    Name = "Main"
+})
+local Encounters = Window:MakeTab({
+    Name = "Encountering"
+})
+local Transport = Window:MakeTab({
+    Name = "Movement"
+})
+local Stats = Window:MakeTab({
+    Name = "Statistics"
+})
 
-   
-   
-    local money = Stats:AddLabel("Money: Awaiting Refresh")
-    local vp = Stats:AddLabel("VP: Awaiting Refresh")
-    local tickets = Stats:AddParagraph("Tickets:","Awaiting Refresh")
+local money = Stats:AddLabel("Money: Awaiting Refresh")
+local vp = Stats:AddLabel("VP: Awaiting Refresh")
+local tickets = Stats:AddParagraph("Tickets:", "Awaiting Refresh")
 
-    Stats:AddButton({
-        Name="Refresh",
-        Callback = function()
-            local args = {
-                [1] = "GetMoney"
-            }
-            Money = game:GetService("Players"):WaitForChild("Nebula_Manta"):WaitForChild("Remotes"):WaitForChild("PlayerDataFunc"):InvokeServer(unpack(args))
-            money:Set("Money:"..Money)
+Stats:AddButton({
+    Name = "Refresh",
+    Callback = function()
+        local args = {
+            [1] = "GetMoney"
+        }
+        Money = game:GetService("Players"):WaitForChild("Nebula_Manta"):WaitForChild("Remotes"):WaitForChild(
+            "PlayerDataFunc"):InvokeServer(unpack(args))
+        money:Set("Money:" .. Money)
 
-            local args = {
-                [1] = "GetVP"
-            }
-            VP = game:GetService("Players"):WaitForChild("Nebula_Manta"):WaitForChild("Remotes"):WaitForChild("PlayerDataFunc"):InvokeServer(unpack(args))
-            vp:Set("VP:"..VP)
+        local args = {
+            [1] = "GetVP"
+        }
+        VP = game:GetService("Players"):WaitForChild("Nebula_Manta"):WaitForChild("Remotes"):WaitForChild(
+            "PlayerDataFunc"):InvokeServer(unpack(args))
+        vp:Set("VP:" .. VP)
 
-            local args = {
-                [1] = "GetTickets"
-            }
-            
-            Tickets = game:GetService("Players"):WaitForChild("Nebula_Manta"):WaitForChild("Remotes"):WaitForChild("PlayerDataFunc"):InvokeServer(unpack(args))
-            whole = ""
-            for i, v in pairs(Tickets) do
-                current = i..":"..v
-                whole = whole.."\n"..current
-                tickets:Set(whole)
-                
-           end
-           print(whole)
-           
+        local args = {
+            [1] = "GetTickets"
+        }
+
+        Tickets = game:GetService("Players"):WaitForChild("Nebula_Manta"):WaitForChild("Remotes"):WaitForChild(
+            "PlayerDataFunc"):InvokeServer(unpack(args))
+        whole = ""
+        for i, v in pairs(Tickets) do
+            current = i .. ":" .. v
+            whole = whole .. "\n" .. current
+            tickets:Set(whole)
+
         end
-        
-        
-    })
-    
-    
+        print(whole)
 
-    Main:AddButton({
-        Name = "Heal",
-        Callback = function()
-            doodleheal()
-        end
-    })
-    Main:AddButton({
-        Name = "Collect Tickets",
-        Callback = function()
-            collect()
-        end
-    })
-    Main:AddButton({
-        Name = "Enable Remote PC",
-        Callback = function()
-            loadstring(game:HttpGet(('https://raw.githubusercontent.com/Aidez/doodle_world/main/storage_access_button'),true))()
-        end
-    }) 
-    Transport:AddToggle({
-        Name = "Ride Bike (Indoors)",
-        Default = false,
-        Callback = function(bikevalue)
+    end
+
+})
+
+Main:AddButton({
+    Name = "Heal",
+    Callback = function()
+        doodleheal()
+    end
+})
+Main:AddButton({
+    Name = "Collect Tickets",
+    Callback = function()
+        collect()
+    end
+})
+Main:AddButton({
+    Name = "Enable Remote PC",
+    Callback = function()
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/Aidez/doodle_world/main/storage_access_button'),
+            true))()
+    end
+})
+Transport:AddToggle({
+    Name = "Ride Bike (Indoors)",
+    Default = false,
+    Callback = function(bikevalue)
         if bikevalue == true then
-                bike()
-            
-        else 
+            bike()
+
+        else
             nobike()
         end
-                
-            end
-        
-    })
-    Transport:AddToggle({
-        Name = "Noclip",
-        Default = false,
-        Callback = function(noclipping)
+
+    end
+
+})
+Transport:AddToggle({
+    Name = "Noclip",
+    Default = false,
+    Callback = function(noclipping)
         if noclipping == true then
-                noclip()
-            
-        else 
+            noclip()
+
+        else
             clip()
         end
-                
-            end
-        
-    })
-    Transport:AddSlider({
-        Name = "Character Speed",
-        Min=0,
-        Max=500,
-        Default=16,
-        Increment=10,
-        Color = Color3.fromRGB(100,100,100),
-        ValueName="Studs/Second",
-        Callback = function(speed)
-            print(speed)
-            getgenv().WalkSpeedValue = speed;
-            local Player = game:service'Players'.LocalPlayer;
-            Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
+
+    end
+
+})
+Transport:AddSlider({
+    Name = "Character Speed",
+    Min = 0,
+    Max = 500,
+    Default = 16,
+    Increment = 10,
+    Color = Color3.fromRGB(100, 100, 100),
+    ValueName = "Studs/Second",
+    Callback = function(speed)
+        print(speed)
+        getgenv().WalkSpeedValue = speed;
+        local Player = game:service 'Players'.LocalPlayer;
+        Player.Character.Humanoid:GetPropertyChangedSignal 'WalkSpeed':Connect(function()
             Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
-            end)
-            Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+        end)
+        Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+
+    end
+
+})
+
+Encounters:AddDropdown({
+    Name = "First Key",
+    Default = " ",
+    Options = {"Route 1", "Route 2", "Route 3", "Route 4", "Lakewood", "Sewer", "Graphite Lodge", "Crossroads",
+               "Crystal Caverns", "Graphite Forest", "Forest Maze"},
+    Callback = function(Location)
+        print(Location)
+        if Location == "Route 1" then
+            local args = {
+                [1] = "Route_1",
+                [2] = "WildGrass"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
+        elseif Location == "Route 2" then
+            local args = {
+                [1] = "006_Route2",
+                [2] = "WildGrass"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
+        elseif Location == "Route 3" then
+            local args = {
+                [1] = "010_Route3",
+                [2] = "WildGrass"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
+        elseif Location == "Route 4" then
+            local args = {
+                [1] = "013_Route4",
+                [2] = "WildGrass"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
+        elseif Location == "Lakewood" then
+            local args = {
+                [1] = "007_Lakewood",
+                [2] = "Lake"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
+        elseif Location == "Sewer" then
+            local args = {
+                [1] = "011_RealSewer",
+                [2] = "Sewer"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
+        elseif Location == "Graphite Lodge" then
+            local args = {
+                [1] = "014_GraphiteLodge",
+                [2] = "WildGrass"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
+        elseif Location == "Crossroads" then
+            local args = {
+                [1] = "017_Crossroads",
+                [2] = "WildGrass"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
+        elseif Location == "Crystal Caverns" then
+            local args = {
+                [1] = "018_CrystalCaverns",
+                [2] = "WildGrass"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
+        elseif Location == "Graphite Forest" then
+            local args = {
+                [1] = "020_GraphiteForest",
+                [2] = "WildGrass"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
+        elseif Location == "Forest Maze" then
+            local args = {
+                [1] = "022_ForestMaze",
+                [2] = "WildGrass"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
 
         end
-        
-    })
-    
+    end
+})
+Encounters:AddDropdown({
+    Name = "Second Key",
+    Default = " ",
+    Options = {"Route 5", "Von Sweetsvile", "Candy Factory"},
+    Callback = function(Location)
+        if Location == "Route 5" then
+            local args = {
+                [1] = "024_Route5",
+                [2] = "WaterGrass"
+            }
 
-    Encounters:AddDropdown({
-            Name = "First Key",
-            Default = " ",
-            Options = {"Route 1","Route 2","Route 3","Route 4","Lakewood","Sewer","Graphite Lodge","Crossroads","Crystal Caverns","Graphite Forest","Forest Maze"},
-            Callback = function(Location)
-                print(Location)
-                if Location == "Route 1" then
-                    local args = {
-                        [1] = "Route_1",
-                        [2] = "WildGrass"
-                    }
-                    
-                    game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-                    elseif Location == "Route 2" then
-                        local args = {
-                            [1] = "006_Route2",
-                            [2] = "WildGrass"
-                        }
-                        
-                        game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-                    elseif Location == "Route 3" then
-                        local args = {
-                            [1] = "010_Route3",
-                            [2] = "WildGrass"
-                        }
-                        
-                        game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-                    elseif Location == "Route 4" then
-                        local args = {
-                            [1] = "013_Route4",
-                            [2] = "WildGrass"
-                        }
-                        
-                        game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-                    elseif Location == "Lakewood" then
-                        local args = {
-                            [1] = "007_Lakewood",
-                            [2] = "Lake"
-                        }
-                        
-                        game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-                    elseif Location == "Sewer" then
-                        local args = {
-                            [1] = "011_RealSewer",
-                            [2] = "Sewer"
-                        }
-                        
-                        game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-                    elseif Location == "Graphite Lodge" then
-                        local args = {
-                            [1] = "014_GraphiteLodge",
-                            [2] = "WildGrass"
-                        }
-                        
-                        game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-                    elseif Location == "Crossroads" then
-                        local args = {
-                            [1] = "017_Crossroads",
-                            [2] = "WildGrass"
-                        }
-                        
-                        game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-                    elseif Location == "Crystal Caverns" then
-                        local args = {
-                            [1] = "018_CrystalCaverns",
-                            [2] = "WildGrass"
-                        }
-                        
-                        game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-                    elseif Location == "Graphite Forest" then
-                        local args = {
-                            [1] = "020_GraphiteForest",
-                            [2] = "WildGrass"
-                        }
-                        
-                        game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-                    elseif Location == "Forest Maze" then
-                        local args = {
-                            [1] = "022_ForestMaze",
-                            [2] = "WildGrass"
-                        }
-                        
-                        game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-                
-            end
-            end    
-          })
-    Encounters:AddDropdown({
-            Name = "Second Key",
-            Default = " ",
-            Options = {"Route 5","Von Sweetsvile","Candy Factory"},
-            Callback = function(Location)
-            if Location == "Route 5" then
-                local args = {
-                    [1] = "024_Route5",
-                    [2] = "WaterGrass"
-                }
-                
-                game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-           elseif Location == "Von Sweetsvile" then
-                local args = {
-                    [1] = "025_Sweetsville",
-                    [2] = "WildGrass"
-                }
-                
-                game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-            elseif Location == "Candy Factory" then
-                local args = {
-                    [1] = "031_CandyFactory",
-                    [2] = "WildGrass"
-                }
-                
-                game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-           end
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
+        elseif Location == "Von Sweetsvile" then
+            local args = {
+                [1] = "025_Sweetsville",
+                [2] = "WildGrass"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
+        elseif Location == "Candy Factory" then
+            local args = {
+                [1] = "031_CandyFactory",
+                [2] = "WildGrass"
+            }
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
         end
-        })
-    Encounters:AddDropdown({
-        Name = "Third Key",
-        Default = " ",
-        Options = {"Route 6","Route 7","Route 12","DoodleCo Academy","Arid Mines"},
-        Callback = function(Location)
-        
+    end
+})
+Encounters:AddDropdown({
+    Name = "Third Key",
+    Default = " ",
+    Options = {"Route 6", "Route 7", "Route 12", "DoodleCo Academy", "Arid Mines"},
+    Callback = function(Location)
+
         if Location == "Route 6" then
             local args = {
                 [1] = "032_Route6",
                 [2] = "WildGrass"
             }
-            
-            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
         elseif Location == "Route 7" then
             local args = {
                 [1] = "042_Route7",
                 [2] = "WildGrass"
             }
-            
-            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
         elseif Location == "Route 12" then
             local args = {
                 [1] = "039_Route12",
                 [2] = "WildGrass"
             }
-            
-            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
         elseif Location == "DoodleCo Academy" then
             local args = {
                 [1] = "033_Academy",
                 [2] = "WildGrass"
             }
-            
-            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
+
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
         elseif Location == "Arid Mines" then
             local args = {
                 [1] = "038_AridMines",
                 [2] = "WildGrass"
             }
-            
-            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-        end
-        end
-        })
 
-    Encounters:AddButton({
-            Name = "Re-Encounter Runic Doodle",
-            Callback = function()
-                local args = {
-                    [1] = "044_RunicIsland",
-                    [2] = "RunicWild"
-                }
-                
-                game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(args))
-                
-            end
-        })
-        Main:AddButton({
-        Name = "Rejoin",
-        Callback = function()
-            loadstring(game:HttpGet("https://pastebin.com/raw/1gtVMUz3"))()
+            game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(
+                unpack(args))
         end
-        })
+    end
+})
 
+Encounters:AddButton({
+    Name = "Re-Encounter Runic Doodle",
+    Callback = function()
+        local args = {
+            [1] = "044_RunicIsland",
+            [2] = "RunicWild"
+        }
+
+        game:GetService("Players"):WaitForChild(me):WaitForChild("Remotes"):WaitForChild("SusWile"):FireServer(unpack(
+            args))
+
+    end
+})
+Main:AddButton({
+    Name = "Rejoin",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/1gtVMUz3"))()
+    end
+})
 
 OrionLib:MakeNotification({
     Name = "Manta Hub Has Been Loaded!",
