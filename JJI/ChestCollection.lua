@@ -51,7 +51,7 @@ local Highlight = {"5 Demon Fingers","Maximum Scroll","Domain Shard","Iridescent
 local QueueSuccess = "False"
 if Toggle == "ON" then
     local Queued, QueueFail = pcall(function()
-        queue_on_teleport('loadstring(game:HttpGet("http://www.stingray-digital.online/script/jji"))()')()
+        queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/Nebula-Manta/Stingray/refs/heads/main/JJI/ChestCollection.lua"))()')()
     end)
     if not Queued then
         print("Put this script inside your auto-execution folder:", QueueFail)
