@@ -10,7 +10,7 @@
 **How to use the script during maintenance?**
 - Copy down the source code at http://stingray-digital.online/script/jji and run the script from source instead of from loadstring
 **How to setup Webhook?**
-- Tutorial here, replace `https://yourdiscordwebhook.com` with webhook copied from [here](https://gyazo.com/c779b31b07ca5b11b61ef5de74892980) (use your own server)
+- Tutorial here, replace `https://yourdiscordwebhook.com` with webhook copied from: https://discord.com/channels/1076517723082858598/1298904050221453313/1306556413425745921
 **Edit luck boosts to use during boss fights**
 - Luck boost configuration site is currently down, DM me your Roblox username and boosts you want to use instead for now.
 **Is the script safe to use?**
@@ -20,4 +20,4 @@
 
 **This repository is a collection of separate scripts and not made to be built or ran as a whole**
 
-Any further questions please ask inside the Discord server: https://discord.gg/SzdQMf9XBB
+Any further questions please ask inside the [Discord server](https://discord.gg/SzdQMf9XBB)
