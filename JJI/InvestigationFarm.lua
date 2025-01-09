@@ -327,12 +327,6 @@ if not getgenv().StingrayLoaded then
                     until not Drops:FindFirstChild("Chest")
                 end
 
-                for i, v in ipairs(Mobs:GetChildren()) do
-                    pcall(function()
-                        v.Humanoid.Health = 0
-                    end)
-                end
-
             end)
 
             ClientRemotes:WaitForChild("StorylineDialogueSkip"):FireServer()
