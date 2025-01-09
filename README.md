@@ -20,4 +20,4 @@
 
 **This repository is a collection of separate scripts and not made to be built or ran as a whole**
 
-**Any further questions please ask inside the Discord server: https://discord.gg/SzdQMf9XBB **
+Any further questions please ask inside the Discord server: https://discord.gg/SzdQMf9XBB
