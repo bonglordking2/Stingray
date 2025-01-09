@@ -116,7 +116,7 @@ local Runners = {"Soul Curse"} -- Damn monkeys go AEEHOIIII, add to this table i
 local QueueSuccess = "False"
 if Toggle == "ON" then
     local Queued, QueueFail = pcall(function()
-        queue_on_teleport('loadstring(game:HttpGet("http://www.stingray-digital.online/script/jji"))()')()
+        queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/Nebula-Manta/Stingray/refs/heads/main/JJI/BossFarm.lua"))()')()
     end)
     if not Queued then
         print("Put this script inside your auto-execution folder:", QueueFail)
