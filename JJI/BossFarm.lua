@@ -5,4 +5,12 @@ until game:IsLoaded()
 
 -- Maintenance --
 setclipboard("https://discord.gg/ja8hEmmX")
-game.Players.LocalPlayer:Kick("Script is in maintenance!!!\n Discord server copied to clipboard for details (updated):\nCheck #important")
+local function CustomKick(Title, Desc, Button)
+    game.Players.LocalPlayer:Kick()
+    local Prompt = game:GetService("CoreGui"):WaitForChld("RobloxPromptGui"):WaitForChild("promptOverlay")
+    Prompt:FindFirstChild("ErrorTitle",true).Text = Title
+    Prompt:FindFirstChild("ErrorMessage",true).Text = Desc
+    Prompt:FindFirstChild("ButtonText",true).Text = Button
+end
+
+CustomKick("Script Maintenance", "Discord server copied to clipboard for details (invite works now)\n\nCheck #Important for info", "Leave")
