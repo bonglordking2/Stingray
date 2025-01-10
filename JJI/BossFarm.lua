@@ -7,7 +7,7 @@ until game:IsLoaded()
 setclipboard("https://discord.gg/ja8hEmmX")
 local function CustomKick(Title, Desc, Button)
     game.Players.LocalPlayer:Kick()
-    local Prompt = game:GetService("CoreGui"):WaitForChld("RobloxPromptGui"):WaitForChild("promptOverlay")
+    local Prompt = game:GetService("CoreGui"):WaitForChild("RobloxPromptGui"):WaitForChild("promptOverlay")
     Prompt:FindFirstChild("ErrorTitle",true).Text = Title
     Prompt:FindFirstChild("ErrorMessage",true).Text = Desc
     Prompt:FindFirstChild("ButtonText",true).Text = Button
