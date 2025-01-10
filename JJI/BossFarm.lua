@@ -2,8 +2,13 @@ repeat
     task.wait()
 until game:IsLoaded()
 
-if not getgenv().StingrayLoaded then
-getgenv().StingrayLoaded = true
+
+-- Maintenance --
+setclipboard("https://discord.gg/c7H6H72h")
+game.Players.LocalPlayer:Kick("Script is in maintenance!!!\n Discord server copied to clipboard for details:\nCheck #important")
+
+if getgenv().StingrayLoaded then
+getgenv().StingrayLoaded = false
 print("Script Loaded")
 
 -- Init --
