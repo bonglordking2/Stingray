@@ -76,7 +76,7 @@ task.spawn(function()
 end)
 
 -- UI --
-local UI = loadstring(game:HttpGet("http://www.stingray-digital.online/script/ui"))()
+local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/bonglordking2/Stingray/refs/heads/main/UI"))()
 local MainUI = UI.InitUI()
 
 local Toggle = "ON"
